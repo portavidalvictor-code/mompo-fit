@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================
+   MOMPÓ FIT · Sistema visual
+   ============================================================= */
+
+:root {
+  --ink-950: #070707;
+  --ink-900: #0E0E0E;
+  --bone: #F5F2EE;
+  --blood: #0B5D3B;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  background: var(--ink-950);
+  color: var(--bone);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* Selección de texto */
+::selection {
+  background: var(--blood);
+  color: var(--bone);
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blood);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1F8754;
+}
+
+/* =============================================================
+   COMPONENTES UTILITARIOS
+   ============================================================= */
+
+@layer components {
+  /* Botón principal rojo */
+  .btn-blood {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-4 bg-blood text-bone font-mono uppercase tracking-wider text-xs border border-blood transition-all duration-200;
+  }
+  .btn-blood:hover {
+    @apply bg-blood-600 border-blood-600;
+    box-shadow: 0 0 30px -5px rgba(11, 93, 59, 0.6);
+  }
+
+  /* Botón secundario fantasma */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-4 bg-transparent text-bone font-mono uppercase tracking-wider text-xs border border-white/20 transition-all duration-200;
+  }
+  .btn-ghost:hover {
+    @apply border-bone bg-white/5;
+  }
+
+  /* Eyebrow editorial · etiqueta pequeña con guión rojo */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.25em] text-bone/60 mb-3;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--blood);
+  }
+
+  /* Frame de tarjeta */
+  .card-frame {
+    @apply border border-white/10 bg-ink-900 transition-all duration-300;
+  }
+  .card-frame:hover {
+    @apply border-white/30;
+  }
+
+  /* Marquee */
+  .marquee {
+    @apply flex w-max animate-marquee whitespace-nowrap;
+  }
+
+  /* Reveal animation on scroll */
+  .reveal-up {
+    @apply animate-fade-up;
+  }
+
+  /* Diagonal background lines */
+  .diagonal-bg {
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.02) 60px,
+      rgba(255, 255, 255, 0.02) 61px
+    );
+  }
+
+  /* Blood glow effect */
+  .blood-glow {
+    box-shadow: 0 0 60px -10px rgba(11, 93, 59, 0.5);
+  }
+
+  /* Grain texture overlay */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply inline-block w-1.5 h-1.5 rounded-full;
+  }
+}
+
+/* Hide scroll indicator on hero */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
