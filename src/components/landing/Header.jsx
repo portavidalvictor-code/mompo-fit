@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 
 const NAV = [
@@ -65,6 +66,12 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
+            <Link
+              href="/admin/login"
+              className="text-[10px] font-mono uppercase tracking-wider text-bone/40 hover:text-bone transition"
+            >
+              Admin
+            </Link>
             <button
               onClick={openApplyModal}
               className="btn-blood !py-2.5 !px-5 !text-[10px]"
@@ -102,6 +109,12 @@ export default function Header() {
               >
                 Aplicar al programa
               </button>
+              <Link
+                href="/admin/login"
+                className="block text-center text-[11px] font-mono uppercase tracking-wider text-bone/40"
+              >
+                Acceso admin
+              </Link>
             </div>
           </div>
         </div>
