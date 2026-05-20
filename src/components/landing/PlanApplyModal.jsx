@@ -56,6 +56,7 @@ export default function PlanApplyModal() {
   const [selectedPlan, setSelectedPlan] = useState('');
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   // Form data
   const [formData, setFormData] = useState({
@@ -150,12 +151,12 @@ export default function PlanApplyModal() {
   const submitAll = async () => {
     if (!selectedDay || !selectedTime) return;
     setSubmitting(true);
+    setSubmitError(null);
     try {
       const appointmentDate = selectedDay.toISOString().split('T')[0];
       const appointmentTime = selectedTime;
       const appointmentLabel = formatFullDate(selectedDay) + ' a las ' + selectedTime;
 
-      // Guardar en Supabase
       const { error: dbError } = await supabase.from('applications').insert([
         {
           name: formData.name,
@@ -179,34 +180,23 @@ export default function PlanApplyModal() {
 
       if (dbError) {
         console.error('Error Supabase:', dbError);
+        setSubmitError('No se pudo guardar tu solicitud. Escríbeme directamente a mompoasesorias@gmail.com o por WhatsApp.');
+        return;
       }
 
-      // También intentar enviar email (silencioso si falla)
+      // Email (silencioso si falla — el dato ya está en BD)
       try {
         await fetch('/api/solicitudes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            ...formData,
-            plan: selectedPlan,
-            appointmentDate,
-            appointmentTime,
-            appointmentLabel,
-          }),
+          body: JSON.stringify({ ...formData, plan: selectedPlan, appointmentDate, appointmentTime, appointmentLabel }),
         });
-      } catch (emailErr) {
-        // ignore - ya está guardado en BD
-      }
+      } catch (_) {}
 
-      // Mostrar éxito si al menos Supabase funcionó
-      if (!dbError) {
-        setStep(3);
-      } else {
-        alert('Hubo un error. Inténtalo de nuevo o escríbeme a josemompo8@gmail.com');
-      }
+      setStep(3);
     } catch (err) {
       console.error('Error general:', err);
-      alert('Hubo un error. Inténtalo de nuevo o escríbeme a josemompo8@gmail.com');
+      setSubmitError('No se pudo guardar tu solicitud. Escríbeme directamente a mompoasesorias@gmail.com o por WhatsApp.');
     } finally {
       setSubmitting(false);
     }
@@ -517,11 +507,19 @@ export default function PlanApplyModal() {
                 </div>
               )}
 
+              {/* Error de envío */}
+              {submitError && (
+                <div className="flex items-start gap-3 bg-red-950/40 border border-red-500/30 p-4">
+                  <AlertCircle size={15} className="text-red-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-red-300 leading-relaxed">{submitError}</p>
+                </div>
+              )}
+
               {/* Buttons */}
               <div className="pt-4 flex flex-col-reverse md:flex-row items-stretch md:items-center md:justify-between gap-3 border-t border-white/10">
                 <button
                   type="button"
-                  onClick={() => setStep(1)}
+                  onClick={() => { setStep(1); setSubmitError(null); }}
                   className="inline-flex items-center justify-center gap-2 px-5 py-3 border border-white/20 text-[10px] font-mono uppercase tracking-wider text-bone/70 hover:border-white/40 transition"
                 >
                   <ArrowLeft size={12} /> Volver al formulario
