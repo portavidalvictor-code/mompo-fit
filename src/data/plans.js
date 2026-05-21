@@ -35,8 +35,6 @@ export const PLANS = [
       'Seguimiento semanal estructurado',
       'Ajustes de carga y nutrición cada semana',
       'Análisis de composición corporal mensual',
-      'Llamada quincenal 1 a 1 (30 min)',
-      'Revisión técnica en vídeo semanal',
       'Acceso a plataforma personalizada con videoteca técnica',
       'Soporte WhatsApp 24/7 y reuniones en videollamada',
     ],
@@ -76,8 +74,6 @@ export const PLANS = [
       'Seguimiento semanal estructurado',
       'Ajustes de carga y nutrición cada semana',
       'Análisis de composición corporal mensual',
-      'Llamada quincenal 1 a 1 (30 min)',
-      'Revisión técnica en vídeo semanal',
       'Acceso a plataforma personalizada con videoteca técnica',
       'Soporte WhatsApp 24/7 y reuniones en videollamada',
     ],
@@ -129,13 +125,4 @@ export const CASES = [
 // OPINIONES DE CLIENTES · Testimonios
 // =============================================================
 
-export const TESTIMONIALS = [
-  {
-    id: 't-001',
-    name: 'David D.',
-    rating: 5,
-    date: '2026-04-20',
-    plan: 'Trimestral PRO',
-    text: 'Súper contento con Jose, un entrenador de 10, resultados increíbles.',
-  },
-];
+export const TESTIMONIALS = [];
