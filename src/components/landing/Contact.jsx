@@ -1,4 +1,4 @@
-import { Instagram, Mail, Phone, MessageCircle, ArrowUpRight } from 'lucide-react';
+import { Instagram, Mail, ArrowUpRight } from 'lucide-react';
 
 const CHANNELS = [
   {
@@ -9,25 +9,11 @@ const CHANNELS = [
     note: 'Mejor canal para conocer mi día a día',
   },
   {
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: '+34 693 848 285',
-    href: 'https://wa.me/34693848285',
-    note: 'Respuesta rápida',
-  },
-  {
     icon: Mail,
     label: 'Email',
     value: 'mompoasesorias@gmail.com',
     href: 'mailto:mompoasesorias@gmail.com',
     note: 'Para presentaciones formales',
-  },
-  {
-    icon: Phone,
-    label: 'Teléfono',
-    value: '+34 693 848 285',
-    href: 'tel:+34693848285',
-    note: 'Solo casos urgentes',
   },
 ];
 
@@ -40,7 +26,7 @@ export default function Contact() {
           <div>
             <div className="eyebrow">007 — Contacto</div>
             <h2 className="font-display text-5xl md:text-7xl tracking-crush leading-none text-bone uppercase">
-              Cuatro<br />
+              Dos<br />
               caminos.<br />
               <span className="text-blood">Elige</span>.
             </h2>
@@ -54,7 +40,7 @@ export default function Contact() {
         </div>
 
         {/* Canales */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
+        <div className="grid md:grid-cols-2 gap-px bg-white/10 max-w-2xl">
           {CHANNELS.map((c) => {
             const Icon = c.icon;
             return (
