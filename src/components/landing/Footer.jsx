@@ -97,14 +97,6 @@ export default function Footer() {
                 </a>
               </li>
               <li className="text-bone/50 text-sm pt-1">Valencia, España</li>
-              <li className="pt-3">
-                <Link
-                  href="/admin/login"
-                  className="text-[10px] font-mono uppercase tracking-wider text-bone/40 hover:text-blood transition"
-                >
-                  Acceso admin →
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
