@@ -9,8 +9,6 @@ import Reviews from '@/components/landing/Reviews';
 import Contact from '@/components/landing/Contact';
 import Footer from '@/components/landing/Footer';
 import PlanApplyModal from '@/components/landing/PlanApplyModal';
-import WAButton from '@/components/landing/WAButton';
-
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-ink-950">
@@ -25,7 +23,6 @@ export default function HomePage() {
       <Contact />
       <Footer />
       <PlanApplyModal />
-      <WAButton />
     </main>
   );
 }
