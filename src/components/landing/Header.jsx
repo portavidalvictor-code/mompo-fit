@@ -10,6 +10,7 @@ const NAV = [
   { id: 'casos', label: 'Casos' },
   { id: 'planes', label: 'Planes' },
   { id: 'opiniones', label: 'Opiniones' },
+  { id: 'contacto', label: 'Contacto' },
 ];
 
 export default function Header() {

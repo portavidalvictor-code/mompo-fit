@@ -6,8 +6,10 @@ import About from '@/components/landing/About';
 import Cases from '@/components/landing/Cases';
 import Pricing from '@/components/landing/Pricing';
 import Reviews from '@/components/landing/Reviews';
+import Contact from '@/components/landing/Contact';
 import Footer from '@/components/landing/Footer';
 import PlanApplyModal from '@/components/landing/PlanApplyModal';
+import WAButton from '@/components/landing/WAButton';
 
 export default function HomePage() {
   return (
@@ -20,8 +22,10 @@ export default function HomePage() {
       <Cases />
       <Pricing />
       <Reviews />
+      <Contact />
       <Footer />
       <PlanApplyModal />
+      <WAButton />
     </main>
   );
 }

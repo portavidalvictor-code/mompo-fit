@@ -5,7 +5,7 @@ const CHANNELS = [
     icon: Instagram,
     label: 'Instagram',
     value: '@mompo.fit',
-    href: 'https://instagram.com',
+    href: 'https://www.instagram.com/mompo.fit/',
     note: 'Mejor canal para conocer mi día a día',
   },
   {
@@ -13,13 +13,13 @@ const CHANNELS = [
     label: 'WhatsApp',
     value: '+34 693 848 285',
     href: 'https://wa.me/34693848285',
-    note: 'Para clientes activos',
+    note: 'Respuesta rápida',
   },
   {
     icon: Mail,
     label: 'Email',
-    value: 'hola@mompofit.com',
-    href: 'mailto:hola@mompofit.com',
+    value: 'mompoasesorias@gmail.com',
+    href: 'mailto:mompoasesorias@gmail.com',
     note: 'Para presentaciones formales',
   },
   {
@@ -38,7 +38,7 @@ export default function Contact() {
         {/* Header */}
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-12 mb-16">
           <div>
-            <div className="eyebrow">006 — Contacto</div>
+            <div className="eyebrow">007 — Contacto</div>
             <h2 className="font-display text-5xl md:text-7xl tracking-crush leading-none text-bone uppercase">
               Cuatro<br />
               caminos.<br />
