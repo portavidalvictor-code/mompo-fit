@@ -20,7 +20,7 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 });
 
-const SITE_URL = 'https://mompofit.com'; // cambiar cuando se compre el dominio
+const SITE_URL = 'https://mompo.fit';
 const SITE_NAME = 'Mompofit';
 
 export const metadata = {
@@ -110,7 +110,7 @@ const schemaOrg = {
     'Entrenamiento personal con José Mompó. Planes de entrenamiento, nutrición y seguimiento personalizado.',
   url: SITE_URL,
   telephone: '+34693848285',
-  email: 'hola@mompofit.com',
+  email: 'mompoasesorias@gmail.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Valencia',
