@@ -1,4 +1,5 @@
 import { Anton, Manrope, JetBrains_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const anton = Anton({
@@ -140,7 +141,10 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
       </head>
-      <body className="bg-ink-950 text-bone font-sans antialiased">{children}</body>
+      <body className="bg-ink-950 text-bone font-sans antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
