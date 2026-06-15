@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Star, Send, CheckCircle2, Quote, AlertCircle, Loader2 } from 'lucide-react';
 import { TESTIMONIALS } from '@/data/plans';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/supabase'; // solo para loadReviews (SELECT)
 
 export default function Reviews() {
   const [rating, setRating] = useState(0);
@@ -62,25 +62,22 @@ export default function Reviews() {
     setStatus('sending');
 
     try {
-      const { data, error } = await supabase.from('reviews').insert([
-        {
-          name: name.trim(),
-          rating,
-          text: text.trim(),
-          approved: true,
-        },
-      ]).select();
+      const res = await fetch('/api/valoraciones', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), rating, text: text.trim() }),
+      });
 
-      if (error) throw error;
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Error desconocido');
 
-      // Añadir la nueva valoración al inicio (optimistic)
-      if (data && data[0]) {
+      if (json.review) {
         const newReview = {
-          id: 'sb-' + data[0].id,
-          name: data[0].name,
-          rating: data[0].rating,
-          text: data[0].text,
-          date: data[0].created_at?.split('T')[0],
+          id: 'sb-' + json.review.id,
+          name: json.review.name,
+          rating: json.review.rating,
+          text: json.review.text,
+          date: json.review.created_at?.split('T')[0],
           plan: '',
         };
         setReviews([newReview, ...reviews]);

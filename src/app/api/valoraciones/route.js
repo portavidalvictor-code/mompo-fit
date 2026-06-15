@@ -1,12 +1,17 @@
 // =============================================================
 // API · Valoraciones de clientes
-// Envía email al coach cuando alguien deja una valoración
+// Guarda en Supabase y envía email al coach
 // =============================================================
 
 import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 
 const COACH_EMAIL = process.env.COACH_EMAIL || 'portavidalvictor@gmail.com';
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://xhbdauaipftrryrfnxmw.supabase.co';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY || 'sb_publishable_vpTkgxZ4AQwVU41oqjCooA_rZWhVhF7';
 
 export async function POST(request) {
   try {
@@ -14,6 +19,19 @@ export async function POST(request) {
 
     if (!name || !rating || !text) {
       return NextResponse.json({ error: 'Faltan datos' }, { status: 400 });
+    }
+
+    // Guardar en Supabase (service key bypasa RLS; si no está configurada usa anon)
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY || SUPABASE_ANON_KEY);
+    const { data: reviewData, error: supabaseError } = await supabase
+      .from('reviews')
+      .insert([{ name: name.trim(), rating, text: text.trim(), approved: true }])
+      .select()
+      .single();
+
+    if (supabaseError) {
+      console.error('Error Supabase:', supabaseError);
+      return NextResponse.json({ error: 'Error al guardar la valoración' }, { status: 500 });
     }
 
     const subject = `Nueva valoración (${rating}★) · ${name}`;
@@ -60,7 +78,7 @@ export async function POST(request) {
       console.log('========================');
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, review: reviewData });
   } catch (error) {
     console.error('Error valoración:', error);
     return NextResponse.json({ error: 'Error al procesar' }, { status: 500 });
