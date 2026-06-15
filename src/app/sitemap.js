@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://mompofit.com';
+  const baseUrl = 'https://mompo.fit';
   const lastModified = new Date();
 
   return [

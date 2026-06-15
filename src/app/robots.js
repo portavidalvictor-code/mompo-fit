@@ -7,6 +7,6 @@ export default function robots() {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://mompofit.com/sitemap.xml',
+    sitemap: 'https://mompo.fit/sitemap.xml',
   };
 }
